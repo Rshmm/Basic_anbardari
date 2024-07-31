@@ -5,7 +5,7 @@ def save(name, brand, price, count):
     db = mysql.connector.connect(user="root", password="root123", database="warehouse", host="localhost")
     cursor = db.cursor()
     # opretions
-    cursor.execute("INSERT INTO product (name, brand, price, count) VALUES ('phone' , 'samsung', '1700', '12')")
+    cursor.execute("INSERT INTO product (name, brand, price, count) VALUES (%s,%s,%s,%s)" , [name, brand, price, count])
     # save
     db.commit()
     # Discoonect
@@ -34,10 +34,29 @@ def find_by_name(name):
     db = mysql.connector.connect(user="root", password="root123", database="warehouse", host="localhost")
     cursor = db.cursor()
     # opretions
-    cursor.execute("SELECT * FROM product WHERE NAME IS 'phone'")
+    cursor.execute("SELECT * FROM product WHERE name = %s" , [name])
     # save (we dont need save cus we dont add anything to the product table)
     product_list = cursor.fetchall()
     # Discoonect
     cursor.close()
     db.close()
     return product_list
+
+
+
+def find_by_price_range(start,end):
+    # Connect
+    db = mysql.connector.connect(user="root", password="root123", database="warehouse", host="localhost")
+    cursor = db.cursor()
+    # opretions
+    cursor.execute("SELECT * FROM product WHERE price BETWEEN %s AND %s" , [start,end])
+    # save (we dont need save cus we dont add anything to the product table)
+    product_list = cursor.fetchall()
+    # Discoonect
+    cursor.close()
+    db.close()
+    return product_list
+
+
+
+
