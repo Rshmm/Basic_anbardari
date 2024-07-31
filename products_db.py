@@ -1,6 +1,6 @@
 import mysql.connector
 
-def save():
+def save(name, brand, price, count):
     # Connect
     db = mysql.connector.connect(user="root", password="root123", database="warehouse", host="localhost")
     cursor = db.cursor()
@@ -34,7 +34,7 @@ def find_by_name(name):
     db = mysql.connector.connect(user="root", password="root123", database="warehouse", host="localhost")
     cursor = db.cursor()
     # opretions
-    cursor.execute("SELECT * FROM product")
+    cursor.execute("SELECT * FROM product WHERE NAME IS 'phone'")
     # save (we dont need save cus we dont add anything to the product table)
     product_list = cursor.fetchall()
     # Discoonect
