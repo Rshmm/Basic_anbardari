@@ -13,6 +13,3 @@ def save_controller(category, brand, name, price, count):
         except Exception as e:
               return False, e
               
-
-print(save_controller("phone123" ,"Iphone", "13pro" , "1200", "10"))
-print(save_controller("laptop" ,"msi", "12hc20" , "800", "5"))
