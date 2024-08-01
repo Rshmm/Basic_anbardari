@@ -1,7 +1,7 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as msg
-from product_controller import save_controller,find_all_controller,edit_controller,remove_controller
+from product_controller import save_controller,find_all_controller,edit_controller,remove_controller,find_by_category_controller
 
 
 def save_click():
@@ -60,6 +60,17 @@ def select_product(event):
     # print(table.item(table.focus())["values"])
 
 
+def search_by_category(event):
+    status,find_all_products = find_by_category_controller(by_category.get())
+    if status == True:
+        # Clear table
+        for row in table.get_children():
+            table.delete(row)
+        # Fill the table 
+        for product in find_all_products:
+            table.insert('',tk.END,values=product)
+    else:
+        msg.showerror("Find", "cant access to database")
 
 
 win = tk.Tk()
@@ -84,7 +95,7 @@ brand = tk.StringVar()
 name = tk.StringVar()
 price = tk.IntVar()
 count = tk.IntVar()
-
+by_category = tk.StringVar()
 
 
 
@@ -95,8 +106,10 @@ tk.Entry(win, textvariable=name).place(x=90,y=170)
 tk.Entry(win, textvariable=price).place(x=90,y=210)
 tk.Entry(win, textvariable=count).place(x=90,y=250)
 #searching part
-tk.Entry(win, textvariable=count).place(x=1080,y=50)
-
+## s stands for search
+s_by_category = tk.Entry(win, textvariable=by_category)
+s_by_category.bind("<KeyRelease>", search_by_category)
+s_by_category.place(x=1080,y=50)
 
 
 tk.Button(win , text="Save", width=10, command=save_click).place(x=10,y=330)
