@@ -6,14 +6,26 @@ from product_controller import save_controller,find_all_controller
 
 def save_click():
     status,data =  save_controller(category.get(), brand.get(), name.get(), price.get(), count.get())
-    if status:
+    if status == True:
         msg.showinfo("saved", data)
+        refresh_form()
     else:
         msg.showerror("save got error", data)
 
 def refresh_form():
+    code.set(0)
+    category.set("")
+    brand.set("")
+    name.set("")
+    price.set(0)
+    count.set(0)
+
     status,find_all_products = find_all_controller()
     if status == True:
+        # Clear table
+        for row in table.get_children():
+            table.delete(row)
+        # Fill the table 
         for product in find_all_products:
             table.insert('',tk.END,values=product)
     else:
