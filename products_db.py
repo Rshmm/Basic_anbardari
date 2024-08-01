@@ -13,6 +13,31 @@ def save(category, brand, name,  price, count):
     db.close()
 
 
+def edit(code, category, brand, name,  price, count):
+    # Connect
+    db = mysql.connector.connect(user="root", password="root123", database="warehouse", host="localhost")
+    cursor = db.cursor()
+    # opretions
+    cursor.execute("UPDATE product SET category=%s, brand=%s, name=%s, price=%s, count=%s WHERE code=%s" , [category, brand, name, price, count, code])
+    # save
+    db.commit()
+    # Discoonect
+    cursor.close()
+    db.close()
+
+def remove(code):
+    # Connect
+    db = mysql.connector.connect(user="root", password="root123", database="warehouse", host="localhost")
+    cursor = db.cursor()
+    # opretions
+    cursor.execute("DELETE FROM product WHERE code=%s" , [code])
+    # save
+    db.commit()
+    # Discoonect
+    cursor.close()
+    db.close()
+
+
 
 def find_all():
   # Connect
@@ -34,7 +59,7 @@ def find_by_category(category):
     db = mysql.connector.connect(user="root", password="root123", database="warehouse", host="localhost")
     cursor = db.cursor()
     # opretions
-    cursor.execute("SELECT * FROM product WHERE name = %s" , [category])
+    cursor.execute("SELECT * FROM product WHERE category = %s" , [category])
     # save (we dont need save cus we dont add anything to the product table)
     product_list = cursor.fetchall()
     # Discoonect
