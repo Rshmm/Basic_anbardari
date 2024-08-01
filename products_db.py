@@ -25,6 +25,18 @@ def edit(code, category, brand, name,  price, count):
     cursor.close()
     db.close()
 
+def remove(code):
+    # Connect
+    db = mysql.connector.connect(user="root", password="root123", database="warehouse", host="localhost")
+    cursor = db.cursor()
+    # opretions
+    cursor.execute("DELETE FROM product WHERE code=%s" , [code])
+    # save
+    db.commit()
+    # Discoonect
+    cursor.close()
+    db.close()
+
 
 
 def find_all():
