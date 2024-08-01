@@ -1,9 +1,15 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as msg
+from product_controller import save_controller
+
 
 def save_click():
-    print(code.get() , category.get(), brand.get(), price.get(), count.get())
+    status,data =  save_controller(category.get(), brand.get(), name.get(), price.get(), count.get())
+    if status:
+        msg.showinfo("saved", data)
+    else:
+        msg.showerror("save got error", data)
 
 
 
