@@ -8,7 +8,7 @@ def save_click():
 
 
 win = tk.Tk()
-win.geometry("400x550")
+win.geometry("800x500")
 win.title("product_management")
 
 header = tk.Label(win,text="Enter product info : ").place(x=10,y=10)
@@ -34,7 +34,22 @@ tk.Entry(win, textvariable=brand).place(x=90,y=130)
 tk.Entry(win, textvariable=price).place(x=90,y=170)
 tk.Entry(win, textvariable=count).place(x=90,y=210)
 
-tk.Button(win , text="save", width=10, command=save_click).place(x=100,y=300)
+tk.Button(win , text="save", width=10, command=save_click).place(x=100,y=250)
 
+
+table = ttk.Treeview(win, columns=(1,2,3,4,5), show="headings")
+table.heading(1, text="code")
+table.heading(2, text="category")
+table.heading(3, text="brand")
+table.heading(4, text="price")
+table.heading(5, text="count")
+
+table.column(1, width=60)
+table.column(2, width=120)
+table.column(3, width=120)
+table.column(4, width=80)
+table.column(5, width=80)
+
+table.place(x=300 , y=50)
 
 win.mainloop()
