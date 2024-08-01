@@ -1,5 +1,5 @@
 import re
-from products_db import save
+from products_db import save,find_all
 
 
 def save_controller(category, brand, name, price, count):
@@ -13,3 +13,11 @@ def save_controller(category, brand, name, price, count):
         except Exception as e:
               return False, e
               
+
+
+def find_all_controller():
+        try:
+            return True,find_all()
+        
+        except Exception as e:
+              return False, e
