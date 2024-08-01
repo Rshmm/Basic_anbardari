@@ -13,6 +13,19 @@ def save(name, brand, price, count):
     db.close()
 
 
+def edit(code, category, brand, name,  price, count):
+    # Connect
+    db = mysql.connector.connect(user="root", password="root123", database="warehouse", host="localhost")
+    cursor = db.cursor()
+    # opretions
+    cursor.execute("UPDATE product SET category=%s, brand=%s, name=%s, price=%s, count=%s WHERE code=%s" , [category, brand, name, price, count, code])
+    # save
+    db.commit()
+    # Discoonect
+    cursor.close()
+    db.close()
+
+
 
 def find_all():
   # Connect
