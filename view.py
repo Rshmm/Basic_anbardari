@@ -1,9 +1,24 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as msg
+from product_controller import save_controller,find_all_controller
+
 
 def save_click():
-    print(code.get() , category.get(), brand.get(), price.get(), count.get())
+    status,data =  save_controller(category.get(), brand.get(), name.get(), price.get(), count.get())
+    if status:
+        msg.showinfo("saved", data)
+    else:
+        msg.showerror("save got error", data)
+
+def refresh_form():
+    status,find_all_products = find_all_controller()
+    if status == True:
+        for product in find_all_products:
+            table.insert('',tk.END,values=product)
+    else:
+        msg.showerror("Find", "cant access to database")
+
 
 
 
@@ -56,5 +71,7 @@ table.column(5, width=80)
 table.column(6, width=80)
 
 table.place(x=300 , y=50)
+
+refresh_form()
 
 win.mainloop()

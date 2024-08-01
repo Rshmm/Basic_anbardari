@@ -5,7 +5,7 @@ def save(category, brand, name,  price, count):
     db = mysql.connector.connect(user="root", password="root123", database="warehouse", host="localhost")
     cursor = db.cursor()
     # opretions
-    cursor.execute("INSERT INTO product (name, brand, price, count) VALUES (%s,%s,%s,%s,%s)" , [category, brand, name, price, count])
+    cursor.execute("INSERT INTO product (category, brand, name,  price, count) VALUES (%s,%s,%s,%s,%s)" , [category, brand, name, price, count])
     # save
     db.commit()
     # Discoonect
