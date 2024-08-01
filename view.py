@@ -41,6 +41,8 @@ def select_product(event):
     count.set(selected_product[5])
     # print(table.item(table.focus())["values"])
 
+def edit_click():
+    pass
 
 
 win = tk.Tk()
@@ -73,7 +75,8 @@ tk.Entry(win, textvariable=name).place(x=90,y=170)
 tk.Entry(win, textvariable=price).place(x=90,y=210)
 tk.Entry(win, textvariable=count).place(x=90,y=250)
 
-tk.Button(win , text="save", width=10, command=save_click).place(x=100,y=300)
+tk.Button(win , text="Save", width=10, command=save_click).place(x=10,y=300)
+tk.Button(win , text="Edit", width=10, command=edit_click).place(x=110,y=300)
 
 
 table = ttk.Treeview(win, columns=(1,2,3,4,5,6), show="headings")
