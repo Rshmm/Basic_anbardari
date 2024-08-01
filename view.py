@@ -63,7 +63,7 @@ def select_product(event):
 
 
 win = tk.Tk()
-win.geometry("1000x500")
+win.geometry("1215x400")
 win.title("product_management")
 
 header = tk.Label(win,text="Enter product info : ").place(x=10,y=10)
@@ -74,6 +74,9 @@ tk.Label(win,text="brand").place(x=20,y=130)
 tk.Label(win,text="name").place(x=20,y=170)
 tk.Label(win,text="price").place(x=20,y=210)
 tk.Label(win,text="count").place(x=20,y=250)
+# searching part
+tk.Label(win,text="searching :").place(x=1000,y=10)
+tk.Label(win,text="by category").place(x=1000,y=50)
 
 code = tk.IntVar()
 category = tk.StringVar()
@@ -91,10 +94,14 @@ tk.Entry(win, textvariable=brand).place(x=90,y=130)
 tk.Entry(win, textvariable=name).place(x=90,y=170)
 tk.Entry(win, textvariable=price).place(x=90,y=210)
 tk.Entry(win, textvariable=count).place(x=90,y=250)
+#searching part
+tk.Entry(win, textvariable=count).place(x=1080,y=50)
 
-tk.Button(win , text="Save", width=10, command=save_click).place(x=10,y=300)
-tk.Button(win , text="Edit", width=10, command=edit_click).place(x=110,y=300)
-tk.Button(win , text="Remove", width=10, command=remove_click).place(x=210,y=300)
+
+
+tk.Button(win , text="Save", width=10, command=save_click).place(x=10,y=330)
+tk.Button(win , text="Edit", width=10, command=edit_click).place(x=110,y=330)
+tk.Button(win , text="Remove", width=10, command=remove_click).place(x=210,y=330)
 
 
 table = ttk.Treeview(win, columns=(1,2,3,4,5,6), show="headings")
@@ -116,7 +123,7 @@ table.column(6, width=80)
 table.bind("<ButtonRelease>", select_product)
 table.bind("<KeyRelease>", select_product)
 
-table.place(x=300 , y=50)
+table.place(x=325 , y=50)
 
 refresh_form()
 
