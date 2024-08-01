@@ -57,7 +57,7 @@ count = tk.IntVar()
 
 
 
-tk.Entry(win, textvariable=code).place(x=90,y=50)
+tk.Entry(win, textvariable=code ,state="disabled").place(x=90,y=50)
 tk.Entry(win, textvariable=category).place(x=90,y=90)
 tk.Entry(win, textvariable=brand).place(x=90,y=130)
 tk.Entry(win, textvariable=name).place(x=90,y=170)
