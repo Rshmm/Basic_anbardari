@@ -31,6 +31,15 @@ def refresh_form():
     else:
         msg.showerror("Find", "cant access to database")
 
+def select_product(event):
+    selected_product = table.item(table.focus())["values"]
+    code.set(selected_product[0])
+    category.set(selected_product[1])
+    brand.set(selected_product[2])
+    name.set(selected_product[3])
+    price.set(selected_product[4])
+    count.set(selected_product[5])
+    # print(table.item(table.focus())["values"])
 
 
 
@@ -81,6 +90,9 @@ table.column(3, width=120)
 table.column(4, width=120)
 table.column(5, width=80)
 table.column(6, width=80)
+
+
+table.bind("<ButtonRelease>", select_product)
 
 table.place(x=300 , y=50)
 
