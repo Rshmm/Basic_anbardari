@@ -22,20 +22,21 @@ def edit_click():
 
 
 def remove_click():
-    status,data =  remove_controller(code.get())
-    if status == True:
-        msg.showinfo("Removed", data)
-        refresh_form()
-    else:
-        msg.showerror("Remove got error", data)
+     if msg.askyesno("Remove","ARE YOU SURE ABOUT REMOVEING THIS PRODCUT ?"):
+        status,data =  remove_controller(code.get())
+        if status == True:
+            msg.showinfo("Removed", data)
+            refresh_form()
+        else:
+            msg.showerror("Remove got error", data)
 
 def refresh_form():
-    code.set(0)
+    code.set("will be set by default")
     category.set("")
     brand.set("")
     name.set("")
-    price.set(0)
-    count.set(0)
+    price.set("")
+    count.set("")
 
     status,find_all_products = find_all_controller()
     if status == True:
