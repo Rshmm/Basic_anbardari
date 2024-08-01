@@ -1,5 +1,5 @@
 import re
-from products_db import save,find_all,edit,remove
+from products_db import save,find_all,edit,remove,find_by_category
 
 
 def save_controller(category, brand, name, price, count):
@@ -38,11 +38,17 @@ def remove_controller(code):
             return False, e
 
 
-
-
 def find_all_controller():
         try:
             return True,find_all()
+        
+        except Exception as e:
+            return False, e
+        
+        
+def find_by_category_controller(category):
+        try:
+            return True,find_by_category(category)
         
         except Exception as e:
             return False, e
