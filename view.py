@@ -1,7 +1,7 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as msg
-from product_controller import save_controller,find_all_controller,edit_controller,remove_controller,find_by_category_controller
+from controller.product_controller import *
 
 
 def save_click():

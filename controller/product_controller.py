@@ -1,5 +1,5 @@
 import re
-from products_db import save,find_all,edit,remove,find_by_category
+from model.products_db import save,find_all,edit,remove,find_by_category
 
 
 def save_controller(category, brand, name, price, count):
