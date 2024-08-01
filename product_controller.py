@@ -1,18 +1,43 @@
 import re
-from products_db import save,find_all
+from products_db import save,find_all,edit,remove
 
 
 def save_controller(category, brand, name, price, count):
         try:
-                if re.match("^[a-zA-Z\s]{2,30}$", category) and re.match("^[a-zA-Z\s]{2,30}$", brand) and re.match("^[a-zA-Z0-9\s]{2,30}$", name) and int(price) > 0 and int(count) > 0:
-                    save(category,brand,name,price,count)
-                    return True, "Stuff saved"
-                else:
-                    raise ValueError("Invalid data")
+            if re.match("^[a-zA-Z\s]{2,30}$", category) and re.match("^[a-zA-Z\s]{2,30}$", brand) and re.match("^[a-zA-Z0-9\s]{2,30}$", name) and int(price) > 0 and int(count) > 0:
+                save(category,brand,name,price,count)
+                return True, "Product saved"
+            else:
+                raise ValueError("Invalid data")
         
         except Exception as e:
-              return False, e
+            return False, e
               
+
+def edit_controller(code, category, brand, name, price, count):
+        try:
+            if code>0 and re.match("^[a-zA-Z\s]{2,30}$", category) and re.match("^[a-zA-Z\s]{2,30}$", brand) and re.match("^[a-zA-Z0-9\s]{2,30}$", name) and int(price) > 0 and int(count) > 0:
+                edit(code,category,brand,name,price,count)
+                return True, "Product Edited"
+            else:
+                raise ValueError("Invalid data")
+        
+        except Exception as e:
+            return False, e
+
+
+def remove_controller(code):
+        try:
+            if code>0 :
+                remove(code)
+                return True, "Product removed"
+            else:
+                raise ValueError("Invalid data")
+        
+        except Exception as e:
+            return False, e
+
+
 
 
 def find_all_controller():
@@ -20,4 +45,4 @@ def find_all_controller():
             return True,find_all()
         
         except Exception as e:
-              return False, e
+            return False, e

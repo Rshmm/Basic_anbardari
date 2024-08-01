@@ -1,23 +1,62 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as msg
-from product_controller import save_controller,find_all_controller
+from product_controller import save_controller,find_all_controller,edit_controller,remove_controller
 
 
 def save_click():
     status,data =  save_controller(category.get(), brand.get(), name.get(), price.get(), count.get())
-    if status:
+    if status == True:
         msg.showinfo("saved", data)
+        refresh_form()
     else:
         msg.showerror("save got error", data)
 
+def edit_click():
+    status,data =  edit_controller(code.get(), category.get(), brand.get(), name.get(), price.get(), count.get())
+    if status == True:
+        msg.showinfo("Edited", data)
+        refresh_form()
+    else:
+        msg.showerror("Edit got error", data)
+
+
+def remove_click():
+    status,data =  remove_controller(code.get())
+    if status == True:
+        msg.showinfo("Removed", data)
+        refresh_form()
+    else:
+        msg.showerror("Remove got error", data)
+
 def refresh_form():
+    code.set(0)
+    category.set("")
+    brand.set("")
+    name.set("")
+    price.set(0)
+    count.set(0)
+
     status,find_all_products = find_all_controller()
     if status == True:
+        # Clear table
+        for row in table.get_children():
+            table.delete(row)
+        # Fill the table 
         for product in find_all_products:
             table.insert('',tk.END,values=product)
     else:
         msg.showerror("Find", "cant access to database")
+
+def select_product(event):
+    selected_product = table.item(table.focus())["values"]
+    code.set(selected_product[0])
+    category.set(selected_product[1])
+    brand.set(selected_product[2])
+    name.set(selected_product[3])
+    price.set(selected_product[4])
+    count.set(selected_product[5])
+    # print(table.item(table.focus())["values"])
 
 
 
@@ -45,14 +84,16 @@ count = tk.IntVar()
 
 
 
-tk.Entry(win, textvariable=code).place(x=90,y=50)
+tk.Entry(win, textvariable=code ,state="disabled").place(x=90,y=50)
 tk.Entry(win, textvariable=category).place(x=90,y=90)
 tk.Entry(win, textvariable=brand).place(x=90,y=130)
 tk.Entry(win, textvariable=name).place(x=90,y=170)
 tk.Entry(win, textvariable=price).place(x=90,y=210)
 tk.Entry(win, textvariable=count).place(x=90,y=250)
 
-tk.Button(win , text="save", width=10, command=save_click).place(x=100,y=300)
+tk.Button(win , text="Save", width=10, command=save_click).place(x=10,y=300)
+tk.Button(win , text="Edit", width=10, command=edit_click).place(x=110,y=300)
+tk.Button(win , text="Remove", width=10, command=remove_click).place(x=210,y=300)
 
 
 table = ttk.Treeview(win, columns=(1,2,3,4,5,6), show="headings")
@@ -69,6 +110,10 @@ table.column(3, width=120)
 table.column(4, width=120)
 table.column(5, width=80)
 table.column(6, width=80)
+
+
+table.bind("<ButtonRelease>", select_product)
+table.bind("<KeyRelease>", select_product)
 
 table.place(x=300 , y=50)
 
