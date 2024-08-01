@@ -1,7 +1,7 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as msg
-from product_controller import save_controller,find_all_controller
+from product_controller import save_controller,find_all_controller,edit_controller,remove_controller
 
 
 def save_click():
@@ -11,6 +11,23 @@ def save_click():
         refresh_form()
     else:
         msg.showerror("save got error", data)
+
+def edit_click():
+    status,data =  edit_controller(code.get(), category.get(), brand.get(), name.get(), price.get(), count.get())
+    if status == True:
+        msg.showinfo("Edited", data)
+        refresh_form()
+    else:
+        msg.showerror("Edit got error", data)
+
+
+def remove_click():
+    status,data =  remove_controller(code.get())
+    if status == True:
+        msg.showinfo("Removed", data)
+        refresh_form()
+    else:
+        msg.showerror("Remove got error", data)
 
 def refresh_form():
     code.set(0)
@@ -41,8 +58,7 @@ def select_product(event):
     count.set(selected_product[5])
     # print(table.item(table.focus())["values"])
 
-def edit_click():
-    pass
+
 
 
 win = tk.Tk()
@@ -77,6 +93,7 @@ tk.Entry(win, textvariable=count).place(x=90,y=250)
 
 tk.Button(win , text="Save", width=10, command=save_click).place(x=10,y=300)
 tk.Button(win , text="Edit", width=10, command=edit_click).place(x=110,y=300)
+tk.Button(win , text="Remove", width=10, command=remove_click).place(x=210,y=300)
 
 
 table = ttk.Treeview(win, columns=(1,2,3,4,5,6), show="headings")
