@@ -93,6 +93,7 @@ table.column(6, width=80)
 
 
 table.bind("<ButtonRelease>", select_product)
+table.bind("<KeyRelease>", select_product)
 
 table.place(x=300 , y=50)
 
