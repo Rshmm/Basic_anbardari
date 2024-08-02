@@ -39,6 +39,7 @@ def refresh_form():
     count.set("")
     by_price_start.set("")
     by_price_end.set("")
+    by_code.set("")
 
     status,find_all_products = find_all_controller()
     if status == True:
@@ -88,7 +89,7 @@ def search_by_name(event):
 
 
 def search_by_code(event):
-    status,find_all_products = find_by_category_controller(by_category.get())
+    status,find_all_products = find_by_code_controller(by_code.get())
     if status == True:
         # Clear table
         for row in table.get_children():
@@ -133,7 +134,8 @@ tk.Label(win,text="count").place(x=20,y=250)
 tk.Label(win,text="searching :").place(x=1000,y=10)
 tk.Label(win,text="by category").place(x=1000,y=50)
 tk.Label(win,text="by name").place(x=1000,y=90)
-tk.Label(win,text="enter your price renge :").place(x=1000,y=150)
+tk.Label(win,text="by code").place(x=1000,y=130)
+tk.Label(win,text="enter your price renge :").place(x=1000,y=170)
 # tk.Label(win,text="by price range").place(x=1000,y=200)
 tk.Label(win,text="to").place(x=1090,y=200)
 
@@ -147,6 +149,7 @@ by_category = tk.StringVar()
 by_name = tk.StringVar()
 by_price_start = tk.IntVar()
 by_price_end = tk.IntVar()
+by_code = tk.IntVar()
 
 tk.Entry(win, textvariable=code ,state="disabled").place(x=90,y=50)
 tk.Entry(win, textvariable=category).place(x=90,y=90)
@@ -162,10 +165,14 @@ s_by_category.place(x=1080,y=50)
 s_by_name = tk.Entry(win, textvariable=by_name)
 s_by_name.bind("<KeyRelease>", search_by_name)
 s_by_name.place(x=1080,y=90)
+s_by_code = tk.Entry(win, textvariable=by_code)
+s_by_code.bind("<KeyRelease>", search_by_code)
+s_by_code.place(x=1080, y=130)
 s_by_price_start = tk.Entry(win, textvariable=by_price_start, width=12)
 s_by_price_start.place(x=1000, y=200)
 s_by_price_end = tk.Entry(win, textvariable=by_price_end, width=12)
 s_by_price_end.place(x=1120, y=200)
+
 
 
 tk.Button(win , text="Save", width=10, command=save_click).place(x=10,y=330)
