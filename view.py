@@ -86,6 +86,19 @@ def search_by_name(event):
     else:
         msg.showerror("Find", "cant access to database")
 
+
+def search_by_code(event):
+    status,find_all_products = find_by_category_controller(by_category.get())
+    if status == True:
+        # Clear table
+        for row in table.get_children():
+            table.delete(row)
+        # Fill the table 
+        for product in find_all_products:
+            table.insert('',tk.END,values=product)
+    else:
+        msg.showerror("Find", "cant access to database")
+
 def search_by_price_range():
     try:
         start_value = int(by_price_start.get())

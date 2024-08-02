@@ -67,6 +67,18 @@ def find_by_category(category):
     db.close()
     return product_list
 
+def find_by_name(name):
+    # Connect
+    db = mysql.connector.connect(user="root", password="root123", database="warehouse", host="localhost")
+    cursor = db.cursor()
+    # opretions
+    cursor.execute("SELECT * FROM product WHERE name LIKE %s" , [name+"%"])
+    # save (we dont need save cus we dont add anything to the product table)
+    product_list = cursor.fetchall()
+    # Discoonect
+    cursor.close()
+    db.close()
+    return product_list
 
 
 def find_by_price_range(start,end):
