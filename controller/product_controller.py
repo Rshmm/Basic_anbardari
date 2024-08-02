@@ -1,9 +1,6 @@
 import re
-<<<<<<< HEAD:controller/product_controller.py
-from model.products_db import save,find_all,edit,remove,find_by_category
-=======
-from products_db import save,find_all,edit,remove,find_by_category,find_by_name
->>>>>>> cotroller:product_controller.py
+from model.products_db import save,find_all,edit,remove,find_by_category,find_by_name
+
 
 
 def save_controller(category, brand, name, price, count):
@@ -56,12 +53,6 @@ def find_by_category_controller(category):
         
         except Exception as e:
             return False, e
-<<<<<<< HEAD:controller/product_controller.py
-        
-
-
-=======
-      
         
 def find_by_name_controller(name):
         try:
@@ -69,4 +60,4 @@ def find_by_name_controller(name):
         
         except Exception as e:
             return False, e
->>>>>>> cotroller:product_controller.py
+
