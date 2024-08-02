@@ -37,6 +37,8 @@ def refresh_form():
     name.set("")
     price.set("")
     count.set("")
+    by_price_start.set("")
+    by_price_end.set("")
 
     status,find_all_products = find_all_controller()
     if status == True:
@@ -84,6 +86,18 @@ def search_by_name(event):
     else:
         msg.showerror("Find", "cant access to database")
 
+def search_by_price_renge(event):
+    status,find_all_products = find_by_price_range_controller(by_price_start.get(),by_price_end.get())
+    if status == True:
+        # Clear table
+        for row in table.get_children():
+            table.delete(row)
+        # Fill the table 
+        for product in find_all_products:
+            table.insert('',tk.END,values=product)
+    else:
+        msg.showerror("Find", "cant access to database")
+
 win = tk.Tk()
 win.geometry("1215x400")
 win.title("product_management")
@@ -100,6 +114,8 @@ tk.Label(win,text="count").place(x=20,y=250)
 tk.Label(win,text="searching :").place(x=1000,y=10)
 tk.Label(win,text="by category").place(x=1000,y=50)
 tk.Label(win,text="by name").place(x=1000,y=90)
+tk.Label(win,text="by price range").place(x=1000,y=130)
+tk.Label(win,text="to").place(x=1130,y=130)
 
 code = tk.IntVar()
 category = tk.StringVar()
@@ -109,7 +125,8 @@ price = tk.IntVar()
 count = tk.IntVar()
 by_category = tk.StringVar()
 by_name = tk.StringVar()
-
+by_price_start = tk.IntVar()
+by_price_end = tk.IntVar()
 
 tk.Entry(win, textvariable=code ,state="disabled").place(x=90,y=50)
 tk.Entry(win, textvariable=category).place(x=90,y=90)
@@ -125,7 +142,12 @@ s_by_category.place(x=1080,y=50)
 s_by_name = tk.Entry(win, textvariable=by_name)
 s_by_name.bind("<KeyRelease>", search_by_name)
 s_by_name.place(x=1080,y=90)
-
+s_by_price_start = tk.Entry(win, textvariable=by_price_start , width=8)
+s_by_price_start.bind("<KeyRelease>", search_by_price_renge)
+s_by_price_start.place(x=1080,y=130)
+s_by_price_end = tk.Entry(win, textvariable=by_price_end , width=8)
+s_by_price_end.bind("<KeyRelease>", search_by_price_renge)
+s_by_price_end.place(x=1150,y=130)
 
 
 tk.Button(win , text="Save", width=10, command=save_click).place(x=10,y=330)
