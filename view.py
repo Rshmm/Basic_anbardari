@@ -72,6 +72,17 @@ def search_by_category(event):
     else:
         msg.showerror("Find", "cant access to database")
 
+def search_by_name():
+    status,find_all_products = find_by_category_controller(by_category.get())
+    if status == True:
+        # Clear table
+        for row in table.get_children():
+            table.delete(row)
+        # Fill the table 
+        for product in find_all_products:
+            table.insert('',tk.END,values=product)
+    else:
+        msg.showerror("Find", "cant access to database")
 
 win = tk.Tk()
 win.geometry("1215x400")
@@ -88,6 +99,7 @@ tk.Label(win,text="count").place(x=20,y=250)
 # searching part
 tk.Label(win,text="searching :").place(x=1000,y=10)
 tk.Label(win,text="by category").place(x=1000,y=50)
+tk.Label(win,text="by name").place(x=1000,y=90)
 
 code = tk.IntVar()
 category = tk.StringVar()
@@ -96,7 +108,7 @@ name = tk.StringVar()
 price = tk.IntVar()
 count = tk.IntVar()
 by_category = tk.StringVar()
-
+by_name = tk.StringVar()
 
 
 tk.Entry(win, textvariable=code ,state="disabled").place(x=90,y=50)
@@ -110,6 +122,10 @@ tk.Entry(win, textvariable=count).place(x=90,y=250)
 s_by_category = tk.Entry(win, textvariable=by_category)
 s_by_category.bind("<KeyRelease>", search_by_category)
 s_by_category.place(x=1080,y=50)
+s_by_name = tk.Entry(win, textvariable=by_name)
+s_by_name.bind("<KeyRelease>", search_by_name)
+s_by_name.place(x=1080,y=90)
+
 
 
 tk.Button(win , text="Save", width=10, command=save_click).place(x=10,y=330)
