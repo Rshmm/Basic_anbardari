@@ -1,5 +1,5 @@
 import re
-from model.products_db import save,find_all,edit,remove,find_by_category,find_by_name
+from model.products_db import save,find_all,edit,remove,find_by_category,find_by_name,find_by_price_range
 
 
 
@@ -54,10 +54,18 @@ def find_by_category_controller(category):
         except Exception as e:
             return False, e
         
-        
+
 def find_by_name_controller(name):
         try:
             return True, find_by_name(name)
+        
+        except Exception as e:
+            return False, e
+
+
+def find_by_price_range_controller(start,end):
+        try:
+            return True, find_by_price_range(start,end)
         
         except Exception as e:
             return False, e
