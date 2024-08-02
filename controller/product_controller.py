@@ -61,6 +61,7 @@ def find_by_name_controller(name):
         
         except Exception as e:
             return False, e
+<<<<<<< HEAD:controller/product_controller.py
 
 
 def find_by_price_range_controller(start,end):
@@ -70,3 +71,13 @@ def find_by_price_range_controller(start,end):
         except Exception as e:
             return False, e
 
+=======
+        
+
+def find_by_code_controller(code):
+    try:
+        return True, find_by_name(code)
+
+    except Exception as e:
+        return False, e
+>>>>>>> cotroller:product_controller.py
