@@ -72,8 +72,8 @@ def search_by_category(event):
     else:
         msg.showerror("Find", "cant access to database")
 
-def search_by_name():
-    status,find_all_products = find_by_category_controller(by_category.get())
+def search_by_name(event):
+    status,find_all_products = find_by_name_controller(by_name.get())
     if status == True:
         # Clear table
         for row in table.get_children():

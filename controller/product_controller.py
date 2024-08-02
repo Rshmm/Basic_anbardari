@@ -54,6 +54,7 @@ def find_by_category_controller(category):
         except Exception as e:
             return False, e
         
+        
 def find_by_name_controller(name):
         try:
             return True, find_by_name(name)
